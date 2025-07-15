@@ -12,7 +12,7 @@ import {
   isEmpty
 } from './shape'
 import { _global_ } from '../global'
-import { toString } from './shape';
+
 
 
 const map=new Map<string,any>()
@@ -179,12 +179,12 @@ export const storage={
  * @returns
  */
 export function getErrorMessage(value:any):string{
-    if(isDefined(value))
+    if(!isDefined(value))
         return ''
     try{
         if(typeof value==='string') return value
         if(typeof value==='number') return toString(value)
-        if(value instanceof Error) return value.message
+        if((value as any) instanceof Error) return value.message
 
         const msg=
         value?.errorMessage??
@@ -196,4 +196,75 @@ export function getErrorMessage(value:any):string{
     }catch{
         return '[Unknown Error]'
     }
+}
+
+/**
+ * 平铺树形数据
+ * @param tree
+ * @param childrenKey
+ * @returns
+ */
+export function flattenTree<
+  T extends Record<string, any> = Record<string, any>,
+  Ck extends keyof T = keyof T
+>(
+  tree: T[],
+  childrenKey?: Ck
+): Array<
+  T & {
+    _parents: T[]
+    _level: number
+  }
+> {
+  const result: T[] = []
+
+  function recurse(node: T, _parents: T[] = []) {
+    const _item = {
+      ...node,
+      _parents,
+      _level: _parents.length + 1
+    }
+    result.push(_item)
+    const children = toArray(node[childrenKey || 'children'])
+    children.forEach((child) => recurse(child, [..._parents, _item]))
+  }
+
+  tree.forEach((root) => recurse(root))
+
+  return result as any
+}
+
+/**
+ * 字典解析
+ * @param value
+ * @param data
+ * @param options
+ * @returns
+ */
+export function formatDict<
+T extends Record<string,any>=any,
+Vk extends keyof T='value',
+Lk extends keyof T='label'
+>(
+    value:any,
+    data:T[]=[],
+    options:{
+        valueKey?:Vk
+        labelKey?:Lk
+        separator?:string
+        fallback?:(val:any)=>string
+    }={}
+):string{
+    const {
+        valueKey='value' as Vk,
+        labelKey='label' as Lk,
+        separator='、',
+        fallback=(val)=>toString(val)
+    }=options
+
+    const list=toArray(value).map((val)=>{
+        const item=data.find((d)=>toString(d[valueKey])===toString(val))
+        return toString(item?.[labelKey])||fallback(val)
+    })
+    return list.join(separator)
 }

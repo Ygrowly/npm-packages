@@ -12,6 +12,7 @@
     "packages/*"
   ],
   "scripts": {
+    "install:all": "pnpm install",
     "build": "pnpm -r run build",
     "lint": "pnpm -r run lint",
     "test": "pnpm -r run test",

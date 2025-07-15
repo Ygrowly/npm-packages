@@ -1,0 +1,9 @@
+node_modules
+dist
+dist-staging
+dist-test
+public
+.idea
+.vscode
+.husky
+.gitee
