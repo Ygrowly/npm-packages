@@ -50,9 +50,10 @@ export const isDefined = <T = any>(val: T): val is NonNullable<T> => !isUndefine
 /**
  * 是否 函数
  */
-export function isFunction(value: unknown): value is Function {
-  return typeof value === 'function';
+export function isFunction<T = unknown>(val: unknown): val is (...args: any[]) => T {
+  return typeof val === 'function'
 }
+
 /**
  * 是否 引用类型
  */

@@ -1,5 +1,5 @@
 {
-  "name": "@ysx-use/hooks",
+  "name": "@gabriel9x9/hooks",
   "main": "./dist/lib/index.cjs",
   "module": "./dist/es/index.mjs",
   "types": "./dist/@types/index.d.ts",
@@ -7,11 +7,11 @@
   "sideEffects": false,
   "version": "0.0.1",
   "type": "module",
-  "description": "hook集合；通用。",
+  "description": "公共库、函数、配置、常量等",
   "keywords": [],
   "license": "MIT",
   "scripts": {
-    "release:patch": "pnpm run lint && pnpm run build && pnpm version patch && pnpm publish --no-git-checks",
+    "release:patch": "pnpm run build",
     "release:minor": "pnpm run lint && pnpm run build && pnpm version minor && pnpm publish --no-git-checks",
     "release:major": "pnpm run lint && pnpm run build && pnpm version major && pnpm publish --no-git-checks",
     "build": "cross-env NAME=hooks vite build --config ../../vite.config.build.ts",
