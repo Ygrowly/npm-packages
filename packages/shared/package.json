@@ -1,15 +1,26 @@
 {
-  "name": "@gabriel9x9/shared",
-  "version": "1.0.0",
-  "main": "dist/index.ts",
-  "types": "dist/index.d.ts",
+  "name": "@ysx-use/shared",
+  "main": "./dist/lib/index.cjs",
+  "module": "./dist/es/index.mjs",
+  "types": "./dist/@types/index.d.ts",
+  "private": false,
+  "sideEffects": false,
+  "version": "0.0.22",
+  "type": "module",
+  "description": "公共库、函数、配置、常量等",
+  "keywords": [],
   "license": "MIT",
   "scripts": {
-    "build": "tsc -p tsconfig.json",
-    "clean": "rimraf dist",
-    "prepare": "pnpm run build"
+    "release:patch": "pnpm run lint && pnpm run build && pnpm version patch && pnpm publish --no-git-checks",
+    "release:minor": "pnpm run lint && pnpm run build && pnpm version minor && pnpm publish --no-git-checks",
+    "release:major": "pnpm run lint && pnpm run build && pnpm version major && pnpm publish --no-git-checks",
+    "build": "cross-env NAME=shared vite build --config ../../vite.config.build.ts",
+    "lint": "tsc --noEmit"
   },
-  "publishConfig": {
-    "registry": "https://npm.pkg.github.com/"
-  }
+  "files": [
+    "dist",
+    "README.md",
+    "package.json",
+    "CHANGELOG.md"
+  ]
 }

@@ -268,3 +268,136 @@ Lk extends keyof T='label'
     })
     return list.join(separator)
 }
+
+/**
+ * 生成随机uuid
+ * @returns
+ */
+export function generateUUID() {
+  let timestamp = new Date().getTime()
+  let uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
+    let r = (timestamp + Math.random() * 16) % 16 | 0
+    timestamp = Math.floor(timestamp / 16)
+    return (c === 'x' ? r : (r & 0x3) | 0x8).toString(16)
+  })
+  return uuid
+}
+
+
+//
+const scriptMap=new Map<string,{status: 'loading'|'loaded'|'error';queue:Function[]}>()
+
+export function loadAsyncScript<T=any>(src:string,globalKey?:string):Promise<T|null>{
+    const id=setCacheResult(src,generateUUID)
+
+    return new Promise((resolve,reject)=>{
+        const getGlobal=()=>
+            globalKey?(_global_.global?.[globalKey] as T|null):null
+
+        const existingScript=_global_.document?.getElementById(id)
+        const entry=scriptMap.get(id)
+
+        if(entry?.status==='loaded'){
+            resolve(getGlobal())
+            return 
+        }
+        if(entry?.status==='loading'){
+            entry.queue.push((err?:any)=>(err?reject(err):resolve(getGlobal())))
+            return
+        }
+
+        scriptMap.set(id,{
+            status:'loaded',
+            queue: [(err?:any)=>(err?reject(err):resolve(getGlobal()))]
+        })
+
+        const script=_global_.document?.createElement('script')
+        if(!script){
+            reject('Cannot create script element')
+            return
+        }
+
+        script.src=src
+        script.id=id
+        script.async=true
+
+        script.onload=()=>{
+            scriptMap.get(id)?.queue.forEach((fn)=>fn())
+            scriptMap.set(id,{status:'loaded',queue:[]})
+        }
+
+        script.onerror=(err)=>{
+            scriptMap.get(id)?.queue.forEach((fn)=>fn(err))
+            scriptMap.set(id,{status:'error',queue:[]})
+            _global_.document?.head.removeChild(script)
+        }
+
+        _global_.document?.head.appendChild(script)
+    })
+}
+
+// 节流 & 防抖
+export function throttle<P extends any[]>(
+    fn:(...args:P)=>any,
+    limit=1000,
+    immediate=true
+){
+    let lastTime=0
+    let timer:any=null
+
+    const throttled=(...args:P)=>{
+        const now=Date.now()
+        const remaining=limit-(now-lastTime)
+
+        if(remaining<=0||!lastTime){
+            if(timer){
+                clearTimeout(timer)
+                timer=null
+            }
+            lastTime=now
+            fn(...args)
+        }else if(!timer&&!immediate){
+            timer=setTimeout(()=>{
+                lastTime=Date.now()
+                fn(...args)
+                timer=null
+            },remaining)
+        }
+    }
+    throttled.cancel=()=>{
+        clearTimeout(timer)
+        timer=null
+    }
+    return throttled
+}
+
+export function debounce<P extends any[]>(
+  fn: (...args: P) => any,
+  delay = 300,
+  immediate = false
+) {
+  let timer: any = null
+  let result: any
+
+  const debounced = (...args: P) => {
+    if (timer) clearTimeout(timer)
+
+    if (immediate && !timer) {
+      result = fn(...args)
+    }
+
+    timer = setTimeout(() => {
+      if (!immediate) result = fn(...args)
+      timer = null
+    }, delay)
+
+    return result
+  }
+
+  debounced.cancel = () => {
+    clearTimeout(timer)
+    timer = null
+  }
+
+  return debounced
+}
