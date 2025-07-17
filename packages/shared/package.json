@@ -5,7 +5,7 @@
   "types": "./dist/@types/index.d.ts",
   "private": false,
   "sideEffects": false,
-  "version": "0.0.1",
+  "version": "0.0.3",
   "type": "module",
   "description": "公共库、函数、配置、常量等",
   "keywords": [],
@@ -25,5 +25,9 @@
   ],
   "publishConfig": {
     "registry": "https://npm.pkg.github.com/"
+  },
+  "dependencies": {
+    "datejs": "1.0.0-rc3",
+    "dayjs": "^1.11.13"
   }
 }
