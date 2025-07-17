@@ -1,36 +1,46 @@
-# @ysx-use
+# @gabriel9x9
 
 前端公共的函数、组件、hooks
 > 单仓库多项目
+
+## use
+
+```
+cd packages/
+pnpm run build
+pnpm publish --no-git-checks
+
+pnpm add @gabriel9x9/shared -w
+```
 
 ## 软件架构
 
 > [pnpm](https://pnpm.io/zh/)、 [react18](https://react.nodejs.cn/)、[typescript](https://www.typescriptlang.org/zh/)
 
-## @ysx-use/antdpro
+## @gabriel9x9/antdpro
 
 基于 antd 二次封装
 
-## @ysx-use/hooks
+## @gabriel9x9/hooks
 
 公用 hooks
 
-## @ysx-use/shared
+## @gabriel9x9/shared
 
 公共函数、配置、常量
 
-## @ysx-use/taro
+## @gabriel9x9/taro
 
 taro的hook，函数封装
 
-## @ysx-use/taro-vantpro
+## @gabriel9x9/taro-vantpro
 
 基于 @antmjs/vantui 二次封装
 
-## @ysx-use/zhulinks-service
+## @gabriel9x9/zhulinks-service
 
 珠凌 api 接口服务
 
-## @ysx-use/certificate-service
+## @gabriel9x9/certificate-service
 
 证书 api 接口服务

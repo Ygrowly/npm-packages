@@ -16,8 +16,8 @@ importers:
         specifier: ^2.26.2
         version: 2.29.5
       '@gabriel9x9/shared':
-        specifier: ^2.0.0
-        version: 2.0.0
+        specifier: workspace:^
+        version: link:packages/shared
       '@rollup/plugin-terser':
         specifier: ^0.4.4
         version: 0.4.4(rollup@4.45.1)
@@ -46,7 +46,11 @@ importers:
         specifier: ^4.5.4
         version: 4.5.4(rollup@4.45.1)(typescript@5.8.3)(vite@7.0.4(terser@5.43.1))
 
-  packages/hooks: {}
+  packages/hooks:
+    dependencies:
+      '@gabriel9x9/shared':
+        specifier: ^0.0.1
+        version: 0.0.1
 
   packages/services: {}
 
@@ -356,8 +360,8 @@ packages:
     cpu: [x64]
     os: [win32]
 
-  '@gabriel9x9/shared@2.0.0':
-    resolution: {integrity: sha512-u0Pk81WqrfXAS2I/5pVx39ATbTSajbIh/x1TA9oPchg56YCNC7yYuJu/PmShMJRJnV5eDY4Gxi8xBT6eWvugTQ==, tarball: https://npm.pkg.github.com/download/@gabriel9x9/shared/2.0.0/e971930fc849476c5083b8821134af5401f02045}
+  '@gabriel9x9/shared@0.0.1':
+    resolution: {integrity: sha512-aRgrZ7Q6EhBXFtGKyOHD1vgEWk2oYmwTcmburtvZAFyCwba+qg9zAZocTTNu7mJQYnoR3uMR3EVD3aa/4XgReg==, tarball: https://npm.pkg.github.com/download/@gabriel9x9/shared/0.0.1/d2b6bd89dc3a440a50a4316c74b7a812aed1d852}
 
   '@isaacs/cliui@8.0.2':
     resolution: {integrity: sha512-O8jcjabXaleOG9DQ0+ARXWZBTfnP4WNAqzuiJK7ll44AmxGKv/J2M4TPjxjY3znBCfvBXFzucm1twdyFybFqEA==}
@@ -1758,7 +1762,7 @@ snapshots:
   '@esbuild/win32-x64@0.25.6':
     optional: true
 
-  '@gabriel9x9/shared@2.0.0': {}
+  '@gabriel9x9/shared@0.0.1': {}
 
   '@isaacs/cliui@8.0.2':
     dependencies:

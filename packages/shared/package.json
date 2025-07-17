@@ -5,16 +5,16 @@
   "types": "./dist/@types/index.d.ts",
   "private": false,
   "sideEffects": false,
-  "version": "0.0.4",
+  "version": "0.0.1",
   "type": "module",
   "description": "公共库、函数、配置、常量等",
   "keywords": [],
   "license": "MIT",
   "scripts": {
-    "release:patch": "pnpm run build && pnpm run build && pnpm version patch && pnpm publish --no-git-checks",
+    "release:patch": "pnpm run build",
     "release:minor": "pnpm run lint && pnpm run build && pnpm version minor && pnpm publish --no-git-checks",
     "release:major": "pnpm run lint && pnpm run build && pnpm version major && pnpm publish --no-git-checks",
-    "build": "cross-env NAME=shared vite build --config ../../vite.config.build.ts",
+    "build": "cross-env NAME=hooks vite build --config ../../vite.config.build.ts",
     "lint": "tsc --noEmit"
   },
   "files": [
@@ -22,5 +22,8 @@
     "README.md",
     "package.json",
     "CHANGELOG.md"
-  ]
+  ],
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/"
+  }
 }

@@ -22,5 +22,8 @@
     "README.md",
     "package.json",
     "CHANGELOG.md"
-  ]
+  ],
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/"
+  }
 }
