@@ -6,6 +6,7 @@
     "@changesets/cli": "^2.26.2",
     "@gabriel9x9/shared": "workspace:^",
     "@rollup/plugin-terser": "^0.4.4",
+    "@types/node": "^24.0.15",
     "@types/react": "^19.1.8",
     "@vitejs/plugin-react": "^4.6.0",
     "cross-env": "^7.0.3",

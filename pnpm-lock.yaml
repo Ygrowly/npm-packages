@@ -21,12 +21,15 @@ importers:
       '@rollup/plugin-terser':
         specifier: ^0.4.4
         version: 0.4.4(rollup@4.45.1)
+      '@types/node':
+        specifier: ^24.0.15
+        version: 24.0.15
       '@types/react':
         specifier: ^19.1.8
         version: 19.1.8
       '@vitejs/plugin-react':
         specifier: ^4.6.0
-        version: 4.6.0(vite@7.0.4(terser@5.43.1))
+        version: 4.6.0(vite@7.0.4(@types/node@24.0.15)(terser@5.43.1))
       cross-env:
         specifier: ^7.0.3
         version: 7.0.3
@@ -41,10 +44,10 @@ importers:
         version: 5.8.3
       vite:
         specifier: ^7.0.4
-        version: 7.0.4(terser@5.43.1)
+        version: 7.0.4(@types/node@24.0.15)(terser@5.43.1)
       vite-plugin-dts:
         specifier: ^4.5.4
-        version: 4.5.4(rollup@4.45.1)(typescript@5.8.3)(vite@7.0.4(terser@5.43.1))
+        version: 4.5.4(@types/node@24.0.15)(rollup@4.45.1)(typescript@5.8.3)(vite@7.0.4(@types/node@24.0.15)(terser@5.43.1))
 
   packages/hooks:
     dependencies:
@@ -54,7 +57,14 @@ importers:
 
   packages/services: {}
 
-  packages/shared: {}
+  packages/shared:
+    dependencies:
+      datejs:
+        specifier: 1.0.0-rc3
+        version: 1.0.0-rc3
+      dayjs:
+        specifier: ^1.11.13
+        version: 1.11.13
 
 packages:
 
@@ -593,6 +603,9 @@ packages:
   '@types/node@12.20.55':
     resolution: {integrity: sha512-J8xLz7q2OFulZ2cyGTLE1TbbZcjpno7FaN6zdJNrgAdrJ+DZzh/uFR6YrTb4C+nXakvud8Q4+rbhoIWlYQbUFQ==}
 
+  '@types/node@24.0.15':
+    resolution: {integrity: sha512-oaeTSbCef7U/z7rDeJA138xpG3NuKc64/rZ2qmUFkFJmnMsAPaluIifqyWd8hSSMxyP9oie3dLAqYPblag9KgA==}
+
   '@types/react@19.1.8':
     resolution: {integrity: sha512-AwAfQ2Wa5bCx9WP8nZL2uMZWod7J7/JSplxbTmBQ5ms6QpqNYm672H0Vu9ZVKVngQ+ii4R/byguVEUZQyeg44g==}
 
@@ -759,6 +772,13 @@ packages:
 
   csstype@3.1.3:
     resolution: {integrity: sha512-M1uQkMl8rQK/szD0LNhtqxIPLpimGm8sOBwU7lLnCpSbTyY3yeU1Vc7l4KT5zT4s/yOxHH5O7tIuuLOCnLADRw==}
+
+  datejs@1.0.0-rc3:
+    resolution: {integrity: sha512-c6kzWmGUKLrdT+8LjUvtAObOgsecqnkpOYOuSDzYdNhdCk3+WALxtBuSMRJDmOfS6JVs/+N2yTGHb0D8oNqB/Q==}
+    engines: {node: '>=0.8'}
+
+  dayjs@1.11.13:
+    resolution: {integrity: sha512-oaMBel6gjolK862uaPQOVTA7q3TZhuSvuMQAAglQDOWYO9A91IrAOUJEyKVlqJlHE0vq5p5UXxzdPfMH/x6xNg==}
 
   de-indent@1.0.2:
     resolution: {integrity: sha512-e/1zu3xH5MQryN2zdVaF0OrdNLUbvWxzMbi+iNA6Bky7l1RoP8a2fIbRocyHclXt/arDrrR6lL3TqFD9pMQTsg==}
@@ -1333,6 +1353,9 @@ packages:
   ufo@1.6.1:
     resolution: {integrity: sha512-9a4/uxlTWJ4+a5i0ooc1rU7C7YOw3wT+UGqdeNNHWnOF9qcMBgLRS+4IYUqbczewFx4mLEig6gawh7X6mFlEkA==}
 
+  undici-types@7.8.0:
+    resolution: {integrity: sha512-9UJ2xGDvQ43tYyVMpuHlsgApydB8ZKfVYTsLDhXkFL/6gfkp+U8xTGdh8pMJv1SpZna0zxG1DwsKZsreLbXBxw==}
+
   universalify@0.1.2:
     resolution: {integrity: sha512-rBJeI5CXAlmy1pV+617WB9J63U6XcazHHF2f2dbJix4XzpUF0RS3Zbj0FGIOCAva5P/d/GBOYaACQ1w+0azUkg==}
     engines: {node: '>= 4.0.0'}
@@ -1808,23 +1831,23 @@ snapshots:
       globby: 11.1.0
       read-yaml-file: 1.1.0
 
-  '@microsoft/api-extractor-model@7.30.6':
+  '@microsoft/api-extractor-model@7.30.6(@types/node@24.0.15)':
     dependencies:
       '@microsoft/tsdoc': 0.15.1
       '@microsoft/tsdoc-config': 0.17.1
-      '@rushstack/node-core-library': 5.13.1
+      '@rushstack/node-core-library': 5.13.1(@types/node@24.0.15)
     transitivePeerDependencies:
       - '@types/node'
 
-  '@microsoft/api-extractor@7.52.8':
+  '@microsoft/api-extractor@7.52.8(@types/node@24.0.15)':
     dependencies:
-      '@microsoft/api-extractor-model': 7.30.6
+      '@microsoft/api-extractor-model': 7.30.6(@types/node@24.0.15)
       '@microsoft/tsdoc': 0.15.1
       '@microsoft/tsdoc-config': 0.17.1
-      '@rushstack/node-core-library': 5.13.1
+      '@rushstack/node-core-library': 5.13.1(@types/node@24.0.15)
       '@rushstack/rig-package': 0.5.3
-      '@rushstack/terminal': 0.15.3
-      '@rushstack/ts-command-line': 5.0.1
+      '@rushstack/terminal': 0.15.3(@types/node@24.0.15)
+      '@rushstack/ts-command-line': 5.0.1(@types/node@24.0.15)
       lodash: 4.17.21
       minimatch: 3.0.8
       resolve: 1.22.10
@@ -1936,7 +1959,7 @@ snapshots:
   '@rollup/rollup-win32-x64-msvc@4.45.1':
     optional: true
 
-  '@rushstack/node-core-library@5.13.1':
+  '@rushstack/node-core-library@5.13.1(@types/node@24.0.15)':
     dependencies:
       ajv: 8.13.0
       ajv-draft-04: 1.0.0(ajv@8.13.0)
@@ -1946,20 +1969,24 @@ snapshots:
       jju: 1.4.0
       resolve: 1.22.10
       semver: 7.5.4
+    optionalDependencies:
+      '@types/node': 24.0.15
 
   '@rushstack/rig-package@0.5.3':
     dependencies:
       resolve: 1.22.10
       strip-json-comments: 3.1.1
 
-  '@rushstack/terminal@0.15.3':
+  '@rushstack/terminal@0.15.3(@types/node@24.0.15)':
     dependencies:
-      '@rushstack/node-core-library': 5.13.1
+      '@rushstack/node-core-library': 5.13.1(@types/node@24.0.15)
       supports-color: 8.1.1
+    optionalDependencies:
+      '@types/node': 24.0.15
 
-  '@rushstack/ts-command-line@5.0.1':
+  '@rushstack/ts-command-line@5.0.1(@types/node@24.0.15)':
     dependencies:
-      '@rushstack/terminal': 0.15.3
+      '@rushstack/terminal': 0.15.3(@types/node@24.0.15)
       '@types/argparse': 1.0.38
       argparse: 1.0.10
       string-argv: 0.3.2
@@ -1993,11 +2020,15 @@ snapshots:
 
   '@types/node@12.20.55': {}
 
+  '@types/node@24.0.15':
+    dependencies:
+      undici-types: 7.8.0
+
   '@types/react@19.1.8':
     dependencies:
       csstype: 3.1.3
 
-  '@vitejs/plugin-react@4.6.0(vite@7.0.4(terser@5.43.1))':
+  '@vitejs/plugin-react@4.6.0(vite@7.0.4(@types/node@24.0.15)(terser@5.43.1))':
     dependencies:
       '@babel/core': 7.28.0
       '@babel/plugin-transform-react-jsx-self': 7.27.1(@babel/core@7.28.0)
@@ -2005,7 +2036,7 @@ snapshots:
       '@rolldown/pluginutils': 1.0.0-beta.19
       '@types/babel__core': 7.20.5
       react-refresh: 0.17.0
-      vite: 7.0.4(terser@5.43.1)
+      vite: 7.0.4(@types/node@24.0.15)(terser@5.43.1)
     transitivePeerDependencies:
       - supports-color
 
@@ -2161,6 +2192,10 @@ snapshots:
       which: 2.0.2
 
   csstype@3.1.3: {}
+
+  datejs@1.0.0-rc3: {}
+
+  dayjs@1.11.13: {}
 
   de-indent@1.0.2: {}
 
@@ -2694,6 +2729,8 @@ snapshots:
 
   ufo@1.6.1: {}
 
+  undici-types@7.8.0: {}
+
   universalify@0.1.2: {}
 
   universalify@2.0.1: {}
@@ -2708,9 +2745,9 @@ snapshots:
     dependencies:
       punycode: 2.3.1
 
-  vite-plugin-dts@4.5.4(rollup@4.45.1)(typescript@5.8.3)(vite@7.0.4(terser@5.43.1)):
+  vite-plugin-dts@4.5.4(@types/node@24.0.15)(rollup@4.45.1)(typescript@5.8.3)(vite@7.0.4(@types/node@24.0.15)(terser@5.43.1)):
     dependencies:
-      '@microsoft/api-extractor': 7.52.8
+      '@microsoft/api-extractor': 7.52.8(@types/node@24.0.15)
       '@rollup/pluginutils': 5.2.0(rollup@4.45.1)
       '@volar/typescript': 2.4.19
       '@vue/language-core': 2.2.0(typescript@5.8.3)
@@ -2721,13 +2758,13 @@ snapshots:
       magic-string: 0.30.17
       typescript: 5.8.3
     optionalDependencies:
-      vite: 7.0.4(terser@5.43.1)
+      vite: 7.0.4(@types/node@24.0.15)(terser@5.43.1)
     transitivePeerDependencies:
       - '@types/node'
       - rollup
       - supports-color
 
-  vite@7.0.4(terser@5.43.1):
+  vite@7.0.4(@types/node@24.0.15)(terser@5.43.1):
     dependencies:
       esbuild: 0.25.6
       fdir: 6.4.6(picomatch@4.0.3)
@@ -2736,6 +2773,7 @@ snapshots:
       rollup: 4.45.1
       tinyglobby: 0.2.14
     optionalDependencies:
+      '@types/node': 24.0.15
       fsevents: 2.3.3
       terser: 5.43.1
 
