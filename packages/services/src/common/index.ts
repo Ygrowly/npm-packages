@@ -3,7 +3,7 @@ import {
   ServiceRequestConfig,
   ServiceRequestMethod,
   toString,
-} from "@gabriel9x9/shared";
+} from "@ygrowly/shared";
 
 /**
  * 公共服务

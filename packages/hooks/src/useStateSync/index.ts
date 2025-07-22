@@ -1,6 +1,6 @@
 import { useState, useCallback, useRef } from 'react'
 
-import { isFunction } from '@gabriel9x9/shared'
+import { isFunction } from '@ygrowly/shared'
 
 /**
  * 同步 state。解决更新 state 后，无法获取最新值，ref副本

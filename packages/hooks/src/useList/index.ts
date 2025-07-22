@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useRef } from "react";
 import { useStateSync } from "../useStateSync";
-import { isError } from "@gabriel9x9/shared";
+import { isError } from "@ygrowly/shared";
 
 interface UseListOptions<T> {
   /** 是否立即加载第一页数据 (默认: true) */
@@ -269,39 +269,39 @@ export function useList<T = any>(
 }
 
 // ---------- example -----------
-const {
-  data,
-  isLoading,
-  isFinish,
-  isEmpty,
-  loadData,
-  refresh,
-  retry,
-  abortRequest,
-} = useList(
-  async (page, pageSize) => {
-    const res = await fetch(`/api/data?page=${page}&size=${pageSize}`);
-    return res.json();
-  },
-  {
-    pageSize: 15,
-    debounceTime: 500,
-    formatter: (data) =>
-      data.map((item) => ({ ...item, date: new Date(item.date) })),
-  }
-);
+// const {
+//   data,
+//   isLoading,
+//   isFinish,
+//   isEmpty,
+//   loadData,
+//   refresh,
+//   retry,
+//   abortRequest,
+// } = useList(
+//   async (page, pageSize) => {
+//     const res = await fetch(`/api/data?page=${page}&size=${pageSize}`);
+//     return res.json();
+//   },
+//   {
+//     pageSize: 15,
+//     debounceTime: 500,
+//     formatter: (data) =>
+//       data.map((item) => ({ ...item, date: new Date(item.date) })),
+//   }
+// );
 
-// 滚动加载
-useEffect(() => {
-  const handleScroll = () => {
-    if (
-      window.innerHeight + window.scrollY >=
-      document.body.offsetHeight - 200
-    ) {
-      loadData();
-    }
-  };
+// // 滚动加载
+// useEffect(() => {
+//   const handleScroll = () => {
+//     if (
+//       window.innerHeight + window.scrollY >=
+//       document.body.offsetHeight - 200
+//     ) {
+//       loadData();
+//     }
+//   };
 
-  window.addEventListener("scroll", handleScroll);
-  return () => window.removeEventListener("scroll", handleScroll);
-}, [loadData]);
+//   window.addEventListener("scroll", handleScroll);
+//   return () => window.removeEventListener("scroll", handleScroll);
+// }, [loadData]);

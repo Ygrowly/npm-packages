@@ -5,7 +5,7 @@ import {
   sleep,
   isFunction,
   isEmpty as _isEmpty,
-} from "@gabriel9x9/shared";
+} from "@ygrowly/shared";
 //
 import { useStateSync } from "../useStateSync";
 

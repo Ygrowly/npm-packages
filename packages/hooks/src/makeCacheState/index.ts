@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect } from 'react'
-import { storage, isDefined, isFunction, typeToString } from '@gabriel9x9/shared'
+import { storage, isDefined, isFunction, typeToString } from '@ygrowly/shared'
 
 /**
  * 生成 缓存 state，轻量的状态管理
@@ -12,7 +12,7 @@ export function makeCacheState<T>(
 
   const defaultState = isFunction(initialState) ? initialState() : initialState
 
-  const _storagekey = storageKey ? '__cache_state__' + storageKey : ''
+  const _storageKey = storageKey ? '__cache_state__' + storageKey : ''
 
   const state = {
     current: defaultState
@@ -22,13 +22,13 @@ export function makeCacheState<T>(
     current: [] as Array<() => void>
   }
 
-  if (_storagekey) {
-    const storageState = storageActions.get?.(_storagekey)
+  if (_storageKey) {
+    const storageState = storageActions.get?.(_storageKey)
     if (typeToString(state.current) === typeToString(storageState)) {
       state.current = storageState
     } else {
       if (isDefined(storageState)) {
-        storageActions.remove?.(_storagekey)
+        storageActions.remove?.(_storageKey)
       }
     }
   }
@@ -38,8 +38,8 @@ export function makeCacheState<T>(
    */
   function setState(payload: T | ((prev: T) => T)) {
     state.current = isFunction(payload) ? payload(state.current) : payload
-    if (_storagekey) {
-      storageActions.set?.(_storagekey, state.current)
+    if (_storageKey) {
+      storageActions.set?.(_storageKey, state.current)
     }
     events.current.forEach((h) => {
       h()
@@ -58,8 +58,8 @@ export function makeCacheState<T>(
    */
   function delState() {
     state.current = defaultState
-    if (_storagekey) {
-      storageActions.remove?.(_storagekey)
+    if (_storageKey) {
+      storageActions.remove?.(_storageKey)
     }
     events.current.forEach((h) => {
       h()
@@ -69,16 +69,16 @@ export function makeCacheState<T>(
   function useState() {
     const [value, setValue] = React.useState(() => getState())
 
-    const hanlder = useCallback(() => {
+    const handler = useCallback(() => {
       setValue(() => getState())
     }, [])
 
     useEffect(() => {
-      events.current.push(hanlder)
+      events.current.push(handler)
       return () => {
-        events.current = events.current.filter((h) => h !== hanlder)
+        events.current = events.current.filter((h) => h !== handler)
       }
-    }, [hanlder])
+    }, [handler])
 
     return value
   }

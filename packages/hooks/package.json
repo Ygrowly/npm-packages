@@ -1,11 +1,11 @@
 {
-  "name": "@gabriel9x9/hooks",
+  "name": "@ygrowly/hooks",
   "main": "./dist/lib/index.cjs",
   "module": "./dist/es/index.mjs",
   "types": "./dist/@types/index.d.ts",
   "private": false,
   "sideEffects": false,
-  "version": "0.0.2",
+  "version": "0.0.6",
   "type": "module",
   "description": "公用 hooks",
   "keywords": [],
@@ -25,8 +25,5 @@
   ],
   "publishConfig": {
     "registry": "https://npm.pkg.github.com/"
-  },
-  "dependencies": {
-    "@gabriel9x9/shared": "^0.0.1"
   }
 }

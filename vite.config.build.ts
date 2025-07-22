@@ -8,10 +8,10 @@ import fs from 'fs/promises'
 const packages = [
   'hooks',
   'shared',
-  'services',
-].map((v) => `@gabriel9x9/${v}`)
+  'services'
+].map((v) => `@ygrowly/${v}`)
 
-const name = '@gabriel9x9/' + (process.env.NAME || '')
+const name = '@ygrowly/' + (process.env.NAME || '')
 
 const dir = process.env.DIR || './src/'
 
@@ -48,7 +48,7 @@ export default defineConfig({
           const key = keys[idx]
           await fs.writeFile(
             key,
-            emittedFiles.get(key)?.replace(/import\("packages\//g, 'import("@ysx-use/') || ''
+            emittedFiles.get(key)?.replace(/import\("packages\//g, 'import("@ygrowly/') || ''
           )
           idx++
         } while (idx < keys.length)
