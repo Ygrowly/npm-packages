@@ -1,0 +1,29 @@
+{
+  "name": "@ygrowly/myantd",
+  "main": "./dist/lib/index.cjs",
+  "module": "./dist/es/index.mjs",
+  "types": "./dist/@types/index.d.ts",
+  "private": false,
+  "sideEffects": false,
+  "version": "0.0.1",
+  "type": "module",
+  "description": "基于 antd 封装的组件库",
+  "keywords": [],
+  "license": "MIT",
+  "scripts": {
+    "release:patch": "pnpm run build",
+    "release:minor": "pnpm run lint && pnpm run build && pnpm version minor && pnpm publish --no-git-checks",
+    "release:major": "pnpm run lint && pnpm run build && pnpm version major && pnpm publish --no-git-checks",
+    "build": "cross-env NAME=hooks vite build --config ../../vite.config.build.ts",
+    "lint": "tsc --noEmit"
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "package.json",
+    "CHANGELOG.md"
+  ],
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/"
+  }
+}
